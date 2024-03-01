@@ -43,7 +43,7 @@ class Book
 
     public function setTitle(string $title): static
     {
-        $this->title = $title;
+        $this->title = htmlspecialchars($title);
 
         return $this;
     }
@@ -55,7 +55,7 @@ class Book
 
     public function setPrice(float $price): static
     {
-        $this->price = $price;
+        $this->price = htmlspecialchars($price);
 
         return $this;
     }
@@ -67,7 +67,7 @@ class Book
 
     public function setPages(int $pages): static
     {
-        $this->pages = $pages;
+        $this->pages = htmlspecialchars($pages);
 
         return $this;
     }
@@ -79,7 +79,7 @@ class Book
 
     public function setAuthor(string $author): static
     {
-        $this->author = $author;
+        $this->author = htmlspecialchars($author);
 
         return $this;
     }
@@ -91,7 +91,7 @@ class Book
 
     public function setSlug(string $slug): static
     {
-        $this->slug = $slug;
+        $this->slug = htmlspecialchars($slug);
 
         return $this;
     }
@@ -103,7 +103,7 @@ class Book
 
     public function setImgLink(?string $img_link): static
     {
-        $this->img_link = $img_link;
+        $this->img_link = htmlspecialchars($img_link);
 
         return $this;
     }

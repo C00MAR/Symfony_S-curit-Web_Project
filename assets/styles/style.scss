@@ -1,0 +1,79 @@
+@import url(https://db.onlinewebfonts.com/c/eca2f87cc8d5bb1805b2b4d3ccb27f2d?family=Space+Grotesk+Light);
+@import url(https://db.onlinewebfonts.com/c/3cae38e1922262b09edb2d0ab63322ba?family=Space+Grotesk+Medium);
+@import url(https://db.onlinewebfonts.com/c/6fadb95f11c1a47a68286abbd4c33891?family=Space+Grotesk+Regular);
+@import url(https://db.onlinewebfonts.com/c/8de87f1fd3cd41dcb828c936234b3458?family=Space+Grotesk+SemiBold);
+@import url(https://db.onlinewebfonts.com/c/b1b84873f078eb6ab265292dd22d0d4f?family=Space+Grotesk+Bold);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #efefef;
+    font-family: "Space Grotesk Light";
+}
+
+.noise::before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    content: '';
+    opacity: 0.05;
+    z-index: 1000;
+    pointer-events: none;
+    background: url('../noise.gif');
+}
+
+h1, h2, h3, h4, h5, h6, .header_cart, .header_loc {
+    font-family: "Space Grotesk Bold";
+    font-size: 2.5rem;
+    color: #000;
+}
+
+p, a, span, li, div {
+    font-family: "Space Grotesk Light";
+    color: #141414;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, li, div {
+    text-decoration: none;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    padding: 0 3vw;
+    justify-content: space-between;
+
+    .header_boxlogo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+
+        .header_loc {
+            display: block;
+            position: absolute;
+            font-size: 0.65rem;
+            letter-spacing: -0.01rem;
+            top: 20px;
+        }
+    }
+
+    .header_cart {
+        text-decoration: underline;
+        letter-spacing: -1px;
+        color: #000;
+        font-size: 0.9rem;
+    }
+}

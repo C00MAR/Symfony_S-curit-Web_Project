@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Physical Matter - TITLE BOOK{% endblock %}
+{% block title %}Physical Matter - {{book.title|raw}}{% endblock %}
 
 {% block body %}
-<div class="noise"></div>
 <div class="bookPage">
     {% include 'header/index.html.twig' %}
     <h1>SHOW PAGE BOOK </h1>
+    <h2>{{book.title|raw}}</h2>
+    <a href="{{ path('book_delete', {'id': book.id}) }}">DEELTE</a>
 </div>
 {% endblock %}

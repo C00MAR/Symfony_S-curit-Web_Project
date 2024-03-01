@@ -7,7 +7,7 @@ use App\Form\BookType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response; 
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -36,7 +36,7 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[Route('/book_delete/{id}', name: 'book_delete')]
+    #[Route('/book/delete/{id}', name: 'book_delete')]
     public function delete(Book $book, EntityManagerInterface $em): Response
     {
         $em->remove($book);
@@ -65,7 +65,8 @@ class BookController extends AbstractController
         }
 
         return $this->render('book/edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'book' => $book
         ]);
     }
 }
