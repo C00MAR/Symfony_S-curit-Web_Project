@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="noise"></div>
+<div class="header">
+    <div class="header_boxlogo">
+        {# <a href="{{ path('/') }}">sdfsdfsdf</a> #}
+        <img src="{{ asset('images/logo.svg') }}" alt="logo" class="header_logo">
+        <p class="header_loc">
+            PARIS, PARIS
+                <br>
+            EST. 2024
+        </p>
+    </div>
+    <a href="#" class="header_cart">SHOPPING BAG (0)</a>
+</div> 
+{% endblock %}

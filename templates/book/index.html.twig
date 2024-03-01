@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Physical Matter{% endblock %}
+
+{% block body %}
+<div class="noise"></div>
+<div class="bookPage">
+    {% include 'header/index.html.twig' %}
+    <h1>Physical Matter</h1>
+
+    <div>
+        {% for book in books %}
+            <h2>{{book.title|raw}}</h2>
+            <p>{{book.author|raw}}</p>
+            <p>{{book.price|raw}}</p>
+            <p>{{book.pages|raw}}</p>
+            <a href="{{ path('book_show', {'slug': book.slug}) }}">Voir</a>
+            <a href="{{ path('book_edit', {'slug': book.slug}) }}">Modifier</a>
+            
+            <form action="{{ path('book_delete', {'id': book.id}) }}" method="post">
+                <input type="hidden" name="csfr" value="{{csrf_token('delete' ~ book.id)}}">
+                <input type="submit" value="Supprimer">
+            </form>
+        {% else %}
+            <p>Aucun Livre</p>
+        {% endfor %}
+
+        <h2>Ajouter un Livre</h2>
+        {{form(form)}}
+    </div>
+</div>
+{% endblock %}
