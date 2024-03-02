@@ -12,6 +12,14 @@
             EST. 2024
         </p>
     </div>
-    <a href="#" class="header_cart">SHOPPING BAG (0)</a>
+    <div class="header_boxcartLog">
+    {% if app.user %}
+        <a href="{{ path('app_logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ path('app_register') }}">Register</a>
+        <a href="{{ path('app_login') }}">Login</a>
+    {% endif %}
+        <a href="#" class="header_cart">SHOPPING BAG (0)</a>
+    </div>
 </div> 
 {% endblock %}

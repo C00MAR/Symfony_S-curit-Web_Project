@@ -10,7 +10,7 @@
 }
 
 body {
-  background-color: #efefef;
+  background-color: #f2f2f2;
   font-family: "Space Grotesk Light";
 }
 
@@ -33,12 +33,12 @@ h1, h2, h3, h4, h5, h6, .header_cart, .header_loc {
   color: #000;
 }
 
-p, a, span, li, div {
+p, a, span, li, div, input[type=submit] {
   font-family: "Space Grotesk Light";
   color: #141414;
 }
 
-a:hover {
+a:hover, input[type=submit]:hover {
   text-decoration: underline;
 }
 
@@ -67,7 +67,14 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, div {
   letter-spacing: -0.01rem;
   top: 20px;
 }
-.header .header_cart {
+.header .header_boxcartLog {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  text-transform: uppercase;
+}
+.header .header_boxcartLog .header_cart {
   text-decoration: underline;
   letter-spacing: -1px;
   color: #000;

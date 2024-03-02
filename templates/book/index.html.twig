@@ -3,39 +3,149 @@
 {% block title %}Physical Matter{% endblock %}
 
 {% block body %}
+<style lang="scss">
+.bookPage {
+    h1 {
+        text-align: center;
+        padding: 7vw 15vw;
+        height: 90vh;
+        font-size: 10rem;
+        letter-spacing: 25px;
+        text-shadow: 6px 2px 11px rgb(0 0 0 / 50%);
+    }
+
+    .bookPage_box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 7px;
+        text-align: center;
+        width: 95vw;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 25vh;
+
+        .bookPage_boxOfBook, .bookPage_addBook {
+            height: 75vh;
+            width: 33%;
+            background-color: #00000011;
+        }
+
+        .bookPage_boxOfBook {
+            position: relative;
+            
+            .info {
+                padding: 10px;
+                position: absolute;
+                bottom: 0;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: flex-start;
+
+                .title {
+                    font-size: 1.5rem;
+                    margin: 0;
+                    text-transform: uppercase;
+                    font-family: "Space Grotesk Bold";
+                    color: #000;
+                    transition: all 0.15s ease-in-out;
+
+                    &:hover {
+                        text-decoration: underline;
+                        letter-spacing: 2px;
+                    }
+                }
+
+                .author_price {
+                    display: flex;
+                    gap: 4px;
+
+                    .author {
+                        font-style: italic;
+                    }
+
+                    .price {
+
+                    }
+                }
+            }
+            
+            img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .button {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                flex-direction: row;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                text-decoration: none;
+                color: #000;
+                transition: all 0.15s ease-in-out;
+
+                a, input {
+                    padding: 10px;
+                    background-color: #00000022;
+                    text-decoration: none;
+                    color: #000;
+                    transition: all 0.15s ease-in-out;
+                    border: none;
+                    cursor: pointer;
+                    height: 6vh;
+                    font-size: 0.9rem;
+                    align-items: flex-end;
+                    display: flex;
+
+                    &:hover {
+                        background-color: #00000044;
+                    }
+                }
+            }
+        }
+    }
+}
+</style>
+
 <div class="bookPage">
     {% include 'header/index.html.twig' %}
     <h1>Physical Matter</h1>
-        <a href="{{ path('app_register') }}">REgister</a>
-        <a href="{{ path('app_login') }}">Login</a>
-        <a href="{{ path('app_logout') }}">Logout</a>
-    <div>
+    <div class="bookPage_box">
         {% for book in books %}
-            <h2>{{book.title|raw}}</h2>
-            <p>{{book.author|raw}}</p>
-            <p>{{book.price|raw}}</p>
-            <p>{{book.pages|raw}}</p>
-            <img src="{{book.imglink|raw}}" alt="{{book.title|raw}}" width="100">
-            <a href="{{ path('book_show', {'slug': book.slug}) }}">Voir</a>
+            <div class="bookPage_boxOfBook">
+                <div class="info">
+                    <a href="{{ path('book_show', {'slug': book.slug}) }}" class="title">{{book.title|raw}}</a>
+                    <div class="author_price">
+                        <p class="author">by {{book.author|raw}}</p>-<p class="price">{{book.price|raw}} €</p>
+                    </div>
+                </div>
+                <img src="{{book.imglink|raw}}" alt="{{book.title|raw}}" width="100">
+                <div class="button">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('book_edit', {'slug': book.slug}) }}">Modifier</a>
 
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('book_edit', {'slug': book.slug}) }}">Modifier</a>
-
-                <form action="{{ path('book_delete', {'id': book.id}) }}" method="post">
-                    <input type="hidden" name="csfr" value="{{csrf_token('delete' ~ book.id)}}">
-                    <input type="submit" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce Livre de la boutique ?')">
-                </form>
+                    <form action="{{ path('book_delete', {'id': book.id}) }}" method="post">
+                        <input type="hidden" name="csfr" value="{{csrf_token('delete' ~ book.id)}}">
+                        <input type="submit" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce Livre de la boutique ?')">
+                    </form>
+                {% endif %}
+                    <a href="{{ path('book_show', {'slug': book.slug}) }}">Voir</a>
+                </div>
+            </div>
+            {% else %}
+                <p class="bookPage_Nothing">Aucun Livre</p>
+            {% endfor %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                <div class="bookPage_addBook">
+                    <h2>Ajouter un Livre</h2>
+                    {{form(form)}}
+                </div>
             {% endif %}
-            
-        {% else %}
-            <p>Aucun Livre</p>
-        {% endfor %}
-
-        {% if is_granted('ROLE_ADMIN') %}
-            <h2>Ajouter un Livre</h2>
-            {{form(form)}}
-        {% endif %}     
-
     </div>
 </div>
 {% endblock %}
